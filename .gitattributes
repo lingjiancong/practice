@@ -1,0 +1,3 @@
+*.doc diff=word
+*.docs diff=word
+
