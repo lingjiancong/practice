@@ -4,6 +4,8 @@ import org.junit.Test;
 import org.redisson.Redisson;
 import org.redisson.api.RLock;
 import org.redisson.api.RedissonClient;
+import org.redisson.config.Config;
+import org.redisson.config.SingleServerConfig;
 
 /**
  * @author lingjiancong
@@ -14,7 +16,12 @@ public class LockTest {
 
     @Test
     public void testLock() {
-        RedissonClient redisson = Redisson.create();
+        Config config = new Config();
+        SingleServerConfig singleConfig = config.useSingleServer();
+        singleConfig.setPassword("default-password");
+        singleConfig.setAddress("redis://127.0.0.1:6379");
+
+        RedissonClient redisson = Redisson.create(config);
 
         RLock rLock = redisson.getLock(LOCK_NAME);
 

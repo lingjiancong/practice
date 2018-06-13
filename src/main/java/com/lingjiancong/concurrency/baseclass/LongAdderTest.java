@@ -2,6 +2,7 @@ package com.lingjiancong.concurrency.baseclass;
 
 import org.junit.Test;
 
+import java.util.HashMap;
 import java.util.Optional;
 import java.util.concurrent.atomic.LongAdder;
 
@@ -18,7 +19,9 @@ public class LongAdderTest {
         Long value = 1L;
 
         Optional<Integer> optional;
-        Long v = 1l;
+        Long v = 1L;
         v = v * 8;
+        HashMap<String, Integer> map = new HashMap<>(16);
+        map.put("a", 1);
     }
 }
