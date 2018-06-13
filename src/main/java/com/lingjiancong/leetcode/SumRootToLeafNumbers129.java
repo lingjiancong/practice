@@ -47,7 +47,7 @@ public class SumRootToLeafNumbers129 {
 
         Stack<TreeNode> stack = new Stack<>();
         Stack<Integer> stackNum = new Stack<>();
-        int sum = 0, pathNum = 0, height = 0;
+        int sum = 0, pathNum = 0, height = 0, pathHeight = 0;
 
         TreeNode node = root;
 
@@ -58,14 +58,15 @@ public class SumRootToLeafNumbers129 {
                 stackNum.push(height);
 
                 pathNum = pathNum * 10 + node.val;
+                pathHeight++;
                 node = node.left;
             }
 
             node = stack.pop();
             int tHeight = stackNum.pop();
 
-            pathNum = truncate(pathNum, tHeight);
-            height = tHeight;
+            pathNum = truncate(pathNum, pathHeight, tHeight);
+            height = pathHeight = tHeight;
             if (node.left == null && node.right == null) {
                 sum += pathNum;
             }
@@ -76,12 +77,7 @@ public class SumRootToLeafNumbers129 {
 
     }
 
-    public int truncate(int num, int len) {
-        int curLen = 0, t = num;
-        while (t!= 0) {
-            t = t/ 10;
-            curLen++;
-        }
+    public int truncate(int num, int curLen, int len) {
         int diff = curLen - len;
         if (diff < 0) {
             return 0;
@@ -93,8 +89,9 @@ public class SumRootToLeafNumbers129 {
     }
 
     public static void main(String[] args) {
-        TreeNode node1 = new TreeNode(0), node2 = new TreeNode(1), node3 = new TreeNode(3);
+        TreeNode node1 = new TreeNode(1), node2 = new TreeNode(1), node3 = new TreeNode(3);
         node1.left = node2;
+        node1.right = node3;
 
         SumRootToLeafNumbers129 sum = new SumRootToLeafNumbers129();
         System.out.println(sum.sumNumbers(node1));
