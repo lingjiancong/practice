@@ -181,6 +181,8 @@ public class Java8Test {
                         .range(1, 4)
                         .forEach(i -> f.bars.add(new Bar("Bar" + i + " <- " + f.name))));
 
+        System.out.println(foos);
+
         foos.stream()
                 .flatMap(f -> f.bars.stream())
                 .forEach(b -> System.out.println(b.name));
@@ -191,6 +193,18 @@ public class Java8Test {
         persons.stream()
                 .reduce((p1, p2) -> p1.age > p2.age ? p1 : p2)
                 .ifPresent(System.out::println);
+    }
+
+    @Test
+    public void filterTest() {
+        List<Integer> list = new ArrayList<>();
+
+        IntStream.range(1, 4).forEach(v -> list.add(v));
+
+        System.out.println(list);
+
+        List<Integer> value = list.stream().filter(x -> x < 0).collect(Collectors.toList());
+        System.out.println(value);
     }
 
 }
