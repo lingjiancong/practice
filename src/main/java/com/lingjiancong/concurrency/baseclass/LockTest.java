@@ -29,13 +29,18 @@ public class LockTest {
             public void run() {
                 try {
                     lock.lock();
-                    TimeUnit.SECONDS.sleep(6000);
+                    if (value == 1) {
+                        TimeUnit.SECONDS.sleep(100);
+                    } else {
+                        TimeUnit.SECONDS.sleep(100);
+                    }
                     value += 1;
                 } catch (InterruptedException e) {
                     System.out.println(e);
                 } finally {
                     lock.unlock();
                 }
+                Thread thread;
             }
         };
 
