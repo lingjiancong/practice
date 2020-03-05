@@ -1,5 +1,3 @@
-import com.alibaba.fastjson.JSONObject;
-
 import org.junit.Test;
 
 import java.io.BufferedReader;
@@ -44,7 +42,6 @@ public class Test1 {
 
         ObjectOutputStream objectOutputStream;
 
-        JSONObject jsonObject;
     }
 
 
@@ -173,6 +170,13 @@ public class Test1 {
                 }
             });
         }
+    }
+
+    @Test
+    public void testCompare() {
+        byte b1 = 20;
+        int b2 = 20;
+        System.out.println(b1 == b2);
     }
 
 }
