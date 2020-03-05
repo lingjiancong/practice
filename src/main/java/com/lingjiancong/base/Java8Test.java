@@ -1,9 +1,11 @@
 package com.lingjiancong.base;
 
 import org.junit.Assert;
+import org.junit.Rule;
 import org.junit.Test;
 
 import java.time.Instant;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
@@ -205,6 +207,36 @@ public class Java8Test {
 
         List<Integer> value = list.stream().filter(x -> x < 0).collect(Collectors.toList());
         System.out.println(value);
+    }
+
+    @Test
+    public void testEmptySum() {
+
+        Value value = new Value();
+        value.type = 1;
+        value.value = 2;
+
+        List<Value> values = new ArrayList<>();
+        values.add(value);
+
+        int sum = values.stream().filter(x -> x.type == 2).mapToInt(x -> x.value).sum();
+        Assert.assertTrue(sum == 0);
+    }
+
+    class Value {
+        @Rule
+        public int type;
+        public int value;
+    }
+
+    @Test
+    public void testDate() {
+        int monthInt = 201808;
+        final int year = monthInt / 100, month = monthInt % 100;
+        LocalDate date = LocalDate.of(year, month, 1);
+        final String monthString = date.toString().substring(0, 7);
+        System.out.println(monthString);
+
     }
 
 }

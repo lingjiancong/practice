@@ -1,11 +1,9 @@
 package com.lingjiancong.base;
 
+import org.junit.Assert;
 import org.junit.Test;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.DelayQueue;
 import java.util.concurrent.Executors;
@@ -35,5 +33,12 @@ public class ForEachTest {
 
         Random random = ThreadLocalRandom.current();
 
+    }
+
+    @Test
+    public void nullArray() {
+        String s = null;
+        List<String> list = Arrays.asList(s);
+        Assert.assertTrue(list.size() == 1);
     }
 }
