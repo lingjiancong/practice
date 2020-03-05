@@ -1,6 +1,7 @@
 package com.lingjiancong.base;
 
 import java.lang.reflect.Field;
+import org.junit.Test;
 
 /**
  * @author lingjiancong
@@ -21,5 +22,11 @@ public class TestSwapInteger {
         System.out.println("a = " + a + " b = " + b);
         swap(a, b);
         System.out.println("a = " + a + " b = " + b);
+    }
+
+    @Test
+    public void testEqual() {
+        Long value = new Long(0);
+        boolean res = (value == 0);
     }
 }

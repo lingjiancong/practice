@@ -2,115 +2,72 @@ package com.lingjiancong.leetcode;
 
 import org.junit.Test;
 
+import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
+import java.util.Queue;
 import java.util.Set;
 
 /**
+ * Given two words (beginWord and endWord), and a dictionary's word list, find the length of shortest transformation sequence from beginWord to endWord, such that:
+ *
+ * Only one letter can be changed at a time.
+ * Each transformed word must exist in the word list. Note that beginWord is not a transformed word.
+ * Note:
+ *
+ * Return 0 if there is no such transformation sequence.
+ * All words have the same length.
+ * All words contain only lowercase alphabetic characters.
+ * You may assume no duplicates in the word list.
+ * You may assume beginWord and endWord are non-empty and are not the same.
+ * Example 1:
+ *
+ * Input:
+ * beginWord = "hit",
+ * endWord = "cog",
+ * wordList = ["hot","dot","dog","lot","log","cog"]
+ *
+ * Output: 5
+ *
+ * Explanation: As one shortest transformation is "hit" -> "hot" -> "dot" -> "dog" -> "cog",
+ * return its length 5.
+ * Example 2:
+ *
+ * Input:
+ * beginWord = "hit"
+ * endWord = "cog"
+ * wordList = ["hot","dot","dog","lot","log"]
+ *
+ * Output: 0
+ *
+ * Explanation: The endWord "cog" is not in wordList, therefore no possible transformation.
  * @author lingjiancong
  */
 public class WordLadder_127 {
 
-    private int minLen = Integer.MAX_VALUE;
-
-    private int successTime = 0;
-
-    private Set<String> impossibleWord = new HashSet<>();
-
     public int ladderLength(String beginWord, String endWord, List<String> wordList) {
-        if (wordList != null && !wordList.contains(endWord)) {
+
+        if (beginWord == null || endWord == null || wordList == null || wordList.size() == 0) {
             return 0;
         }
-        List<String> process = new ArrayList<>();
-        ladderLength(beginWord, endWord, wordList, process);
-
-        if (minLen == Integer.MAX_VALUE) {
+        if (!wordList.contains(endWord)) {
             return 0;
         }
 
-        return minLen;
+        Queue<String> queue = new ArrayDeque<>();
+        queue.add(beginWord);
+
+        Map<String, Set<String>> adjacent = new HashMap<>();
+        while (!queue.isEmpty()) {
+            String word = queue.poll();
+        }
+
+        return 0;
     }
-
-    public void ladderLength(String beginWord, String endWord, List<String> wordList, List<String> process) {
-
-        final int charStart = 'a', charEnd = 'z', charSize = 26;
-
-        int len = beginWord.length();
-
-        if (impossibleWord.contains(beginWord)) {
-            return;
-        }
-
-        if (differOnce(beginWord, endWord)) {
-            if (process.size() + 2 < minLen) {
-                minLen = process.size() + 2;
-                print(process);
-            }
-            successTime++;
-            return;
-        }
-
-        int beforeSuccessTime = successTime;
-
-        for (int i = 0; i < len; ++i) {
-            for (int j = 1; j < charSize; ++j) {
-
-                // get adjacent word
-                char[] chars = new char[len];
-                char c = (char) ((beginWord.charAt(i) + j - charStart) % 26 + charStart);
-                beginWord.getChars(0, len, chars, 0);
-                chars[i] = c;
-                String adjWord = new String(chars);
-
-                if (wordList.contains(adjWord) && !process.contains(adjWord)) {
-                    process.add(beginWord);
-//                    if (process.size() + 1 > minLen) {
-//                        process.remove(process.size() - 1);
-//                        return;
-//                    } else
-                    if (adjWord.equals(endWord)) {
-                        if (minLen > process.size() + 1) {
-                            minLen = process.size() + 1;
-                            print(process);
-                        }
-                        successTime++;
-                    } else {
-                        ladderLength(adjWord, endWord, wordList, process);
-                    }
-                    process.remove(process.size() - 1);
-                } else if (wordList.contains(adjWord)) {
-                    successTime++;
-                }
-            }
-        }
-
-        if (successTime == beforeSuccessTime) {
-            impossibleWord.add(beginWord);
-        }
-
-    }
-
-    public Boolean differOnce(String w1, String w2) {
-        if (w1 == null || w2 == null) {
-            return false;
-        }
-        if (w1.length() != w2.length()) {
-            return false;
-        }
-        int diffNum = 0;
-        for (int i = 0; i < w1.length(); ++i) {
-            if (w1.charAt(i) != w2.charAt(i)) {
-                diffNum++;
-            }
-            if (diffNum > 1) {
-                return false;
-            }
-        }
-        return true;
-    }
-
 
     public static void main(String[] args) {
         String beginWord = "cet", endWord = "ism";

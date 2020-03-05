@@ -4,7 +4,14 @@ import org.junit.Test;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.time.ZoneOffset;
+import java.time.temporal.ChronoField;
+import java.time.temporal.TemporalField;
 import java.util.Date;
+import java.util.concurrent.atomic.AtomicReference;
+import java.util.concurrent.atomic.AtomicStampedReference;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
  * Created by lenovo on 2016/8/23.
@@ -31,14 +38,20 @@ public class TestTimeStamp {
     public void testJava8Datetime() {
 
         Timestamp timestamp = Timestamp.valueOf("2016-08-22 07:51:57");
-        LocalDateTime dateTime = LocalDateTime.parse("2016-08-22T07:51:57.09");
+        LocalDateTime dateTime = LocalDateTime.parse("2018-12-01T00:00:00");
+        System.out.println(dateTime.atZone(ZoneOffset.systemDefault()).toEpochSecond());
 
-        LocalDateTime after = dateTime.plusDays(1);
-        System.out.println(after);
-
-        System.out.println(after.compareTo(LocalDateTime.now()));
+        Date date = new Date(118, 11, 1);
+        System.out.println(date.getTime());
 
         System.out.println(dateTime);
+        System.out.println(date);
+
+        Object object = new Object();
+
+        AtomicReference atomicReference;
+
+        AtomicStampedReference atomicStampedReference;
 
     }
 }

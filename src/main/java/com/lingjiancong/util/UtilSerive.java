@@ -63,4 +63,32 @@ public class UtilSerive {
         ImageIO.write(image, "jpeg", outputStream);
         System.out.println(captcha.getAnswer());
     }
+
+    @Test
+    public void testToString() {
+        Double d = 12D;
+        System.out.println(d.toString());
+
+        String s = "s" + null;
+        System.out.println(s);
+//
+//        Double a = null;
+//        System.out.println(a * 10);
+
+        for (int i = 3; i < 0; ++i) {
+            System.out.println("hhhh");
+        }
+
+
+    }
+
+    @Test
+    public void test() {
+        testWhat(1L);
+
+    }
+
+    public void testWhat(Long... longs) {
+        System.out.println(longs);
+    }
 }

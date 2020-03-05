@@ -64,6 +64,7 @@ public class Regex {
         return sb.toString();
 
     }
+
     /*
      * @param s primitive, a java file to primitive
      */
@@ -114,12 +115,38 @@ public class Regex {
         int index = 0;
         Matcher m = p.matcher(""); // creates emtpy Matcher object
         Matcher n = q.matcher("");
-        for(String line : fileToArray(fileName)) {
+        for (String line : fileToArray(fileName)) {
             m.reset(line);
             n.reset(line);
-            while(m.find() && !n.find())
+            while (m.find() && !n.find())
                 System.out.println(index++ + ": " + m.group());
         }
+    }
+
+    @Test
+    public void testRegex() {
+
+        String httpDomainRegex = "^(http(s?)|HTTP(S?))://[^\\s]*";
+        String imgStr = "aaaaaaaafdsfsdfsd";
+
+        long start1 = System.currentTimeMillis();
+        for (int i = 0; i < 10000; i++) {
+            imgStr.matches(httpDomainRegex);
+        }
+
+        long end1 = System.currentTimeMillis() - start1;
+
+
+        long start2 = System.currentTimeMillis();
+        Pattern p = Pattern.compile(httpDomainRegex);
+        for (int i = 0; i < 10000; i++) {
+            p.matcher(imgStr);
+        }
+
+        long end2 = System.currentTimeMillis() - start2;
+
+        System.err.println("test1:" + end1);
+        System.err.println("test2:" + end2);
     }
 
     @Test

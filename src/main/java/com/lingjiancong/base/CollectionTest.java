@@ -1,11 +1,9 @@
 package com.lingjiancong.base;
 
 import org.junit.Test;
+import org.springframework.util.CollectionUtils;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 /**
  * @author lingjiancong
@@ -25,5 +23,24 @@ public class CollectionTest {
 
         Integer i = 10;
         System.out.println(i.hashCode());
+    }
+
+    @Test
+    public void testListEqual() {
+
+        List<String>  a = new ArrayList<>();
+        a.addAll(Arrays.asList("a", "c", "b"));
+
+        List<String>  b = new ArrayList<>();
+        b.addAll(Arrays.asList("b", "a", "c"));
+
+        System.out.println(a.equals(b));
+
+        Collections.sort(a);
+        Collections.sort(b);
+
+        System.out.println(a.equals(b));
+
+
     }
 }
